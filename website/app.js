@@ -11,7 +11,7 @@ const asyncWeather = async (zip=15085) => {
         const data = await res.json();
         console.log(data);
         return {
-            content: data.base,
+            content: document.querySelector('#feelings').value,
             date: data.dt,
             temp: data.main.temp
         }
