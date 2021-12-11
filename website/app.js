@@ -1,18 +1,18 @@
 /* Global Variables */
 let data = {};
-const apiKey = 'be6a4d51af89985c0ee5ef7faabc09e1&units=imperial';
+const key = 'be6a4d51af89985c0ee5ef7faabc09e1&units=imperial';
 // Create a new date instance dynamically with JS
 let d = new Date();
-let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+let newDate = (d.getMonth() + 1)+'.'+ d.getDate()+'.'+ d.getFullYear();
 
-const asyncWeather = async (zip=15085) => {
+const asyncWeather = async (zip=15085, apiKey) => {
     const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${apiKey}`);
     try {
         const data = await res.json();
         console.log(data);
         return {
             content: document.querySelector('#feelings').value,
-            date: data.dt,
+            date: newDate,
             temp: data.main.temp
         }
     } catch(e) {
@@ -58,7 +58,7 @@ const retrieveData = async () => {
 };
 
 const generateEventListener = document.querySelector('#generate').addEventListener('click', () => {
-    asyncWeather(document.querySelector('#zip').value).then( (data) => {
+    asyncWeather(document.querySelector('#zip').value, key).then( (data) => {
         postData('/', data);
         retrieveData();
         

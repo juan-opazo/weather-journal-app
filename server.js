@@ -40,3 +40,8 @@ app.post('/', (req, res) => {
 app.get('/all', (req, res) => {
   return projectData;
 });
+
+app.get('/apikey', (req, res) => {
+  // res.send(apiKey);
+  return apiKey;
+});
